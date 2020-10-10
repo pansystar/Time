@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+        <link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='css/style.css')}}">  
+    </head>
+    <body>
+        <div class="main_contains">
+            <div class="ico_contains">
+                <img src="{{ url_for('static',filename='img/TatelierIco_v2.png') }}" class="ico"/>
+            </div>
+            <p class="discription">Tatelier アカウントページへようこそ!!</p>
+            <div class="form_master_contains">
+                <div class="form_contains">
+                    <div class="tab_wrap">
+                        <input id="tab1" type="radio" name="tab_btn" checked>
+                        <input id="tab2" type="radio" name="tab_btn">                        
+                        <div class="tab_area">
+                            <label class="tab1_label tab_label" for="tab1">アカウント状態確認</label>
+                            <label class="tab2_label tab_label" for="tab2">サインアップ</label>
+                        </div>
+                        <div class="panel_area">
+                            <div id="panel1" class="tab_panel">
+                                <div class="content">
+                                    <p>アカウントの状態をTwitterのダイレクトメッセージに送信します。
+                                    </p>
+                                    <form action="/login" method="POST">
+                                        <p>Twitter ID</p><input type="text" name="name" />
+                                        <p>Tatelier パスワード</p><input type="password" name="age" />
+                                        <input type="submit" value="送信" />
+                                    </form>
+                                </div>
+                            
+                        </div>
+                        <div id="panel2" class="tab_panel">
+                            <div class="content">
+                                <p>サインアップします。登録が</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+
+<!-- 
+                    <div class="login">
+                        <h2>アカウント<br>状態確認</h2>
+                        <div>
+                            <form action="/login" method="POST">
+                                ログインID:<input type="text" name="name" />
+                                パスワード:<input type="password" name="age" />
+                                <input type="submit" value="送信" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="create">
+                        <h2>新規登録</h2>
+                        <div>
+                            <form action="/create" method="POST">
+                                ログインID:<input type="text" name="name" />
+                                パスワード:<input type="password" name="age" />
+                                もう一度パスワード:<input type="password" name="age" />
+                                <input type="submit" value="新規登録" />
+                            </form>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="tatelier">
+                    <p>Tatelier リリース情報</p>
+                    <div class="tatelier_info_content">
+                        <table border="1">
+                            <tr>
+                              <th>安定版 (stable)</th>
+                              <th>最新版 (latest)</th>
+                            </tr>
+                            <tr>
+                              <td>v20.09.20.01121</td>
+                              <td>v20.10.03.01635</td>
+                            </tr>
+                          </table>
+                    </div>
+                </div>
+                <img src="{{ url_for('static',filename='img/github_icon.png') }}" class="github_icon">
+                <div class="news">
+                    <p>ニュース</p>
+                    <div class="news_content">
+                        <li><a href="">2020.10.02 - アカウントページを開設しました。</a></li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>© 2020 ぱんじすた</footer>
+    </body>
+</html>
