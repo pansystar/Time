@@ -1,0 +1,28 @@
+.time {
+    font-size: 128px;
+    -webkit-transform: rotate(0.028deg);
+    -moz-transform: rotate(0.028deg);
+    -ms-transform: rotate(0.028deg);
+    -o-transform: rotate(0.028deg);
+    transform: rotate(0.028deg);
+    font-family: 'UD デジタル 教科書体 NK-B';
+    color: rgb(104, 104, 104);
+    filter: 
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    drop-shadow(1px 1px 0px #000000FF)
+    ;
+}
+
+.time #hour {
+}
+
+.time #minute {
+}

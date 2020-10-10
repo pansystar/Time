@@ -1,69 +1,28 @@
-from flask import Flask, render_template, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-import pandas as pd
-from sqlalchemy import *
-from sqlalchemy.orm import *
-from sqlalchemy.ext.declarative import declarative_base
+from flask import Flask, request, make_response, send_file, render_template, request, jsonify
 import os
-
-uri = 'postgres://ozqqhdmuqezsca:a220c425e3f1a1ab567bdfb15625642cd33f3ca924a3846352923f45bf39d6ba@ec2-3-208-50-226.compute-1.amazonaws.com:5432/d4p1h3ane0mls4'
+import io
+import zipfile
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = uri
+@app.route("/download")
+def download():
+    fo = io.BytesIO()
+    with zipfile.ZipFile(fo, "w") as zf:
+        zf.write("memo.md", "memo.md")
 
-db = SQLAlchemy(app)
+    fo.seek(0)
 
-Base = declarative_base()
+    response = make_response(fo.read())
+    response.headers.set('Content-Type', 'zip')
+    response.headers.set('Content-Disposition', 'attachment', filename="Time.zip")
 
-class User(Base):
-    __tablename__ = "pansydb"
-    iD = Column(Integer, primary_key=True)
-    user_name = Column(String)
-    age = Column(String)
-
-@app.route("/login")
-def login():
-    try:
-        result = request.args.get('result')
-    except:
-        result = -1
-    return '{"Result": "'+str(result)+'", "Key":"165ED175E107494580D47E4F89C6907C" }'
+    return response
 
 @app.route("/")
 def hello():
+    return render_template("index.html")
 
-    # engine = create_engine('postgres://ozqqhdmuqezsca:a220c425e3f1a1ab567bdfb15625642cd33f3ca924a3846352923f45bf39d6ba@ec2-3-208-50-226.compute-1.amazonaws.com:5432/d4p1h3ane0mls4')  
-    
-    # df = pd.read_sql(sql='select * from pansydb;', con=engine)
-
-    t = text("select * from pansydb")
-
-    df = ""
-
-    for r in db.session.execute(t):
-        df = df + r["user_name"] + ", "
-
-    return render_template('index.html', name=df)
-
-@app.route("/send", methods=["GET"])
-def get_method():
-    name = "GET!!!"
-    return render_template('index.html', name=name)
-
-@app.route("/send", methods=["POST"])
-def post_method():
-    # インサートする
-    iD = request.form['id']
-    age = request.form['age']
-    name = request.form['name']
-    
-    t = text("insert into pansydb (id, user_name, age) values ("+ iD +", '"+ name +"', '" + age + "')")
-
-    db.session.execute(t)
-    db.session.commit()
-
-    return render_template('index.html', name="OK")
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
